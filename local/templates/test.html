@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function func() {
+            var data= new FormData(document.getElementById("form1"));
+            //console.log(data.get("twa"))
+
+            $.ajax({
+                url: "/do",
+                type: 'POST',
+                dataType:"json",
+                data: data,
+                processData:false,
+                contentType:false,
+                success: function (msg) {
+                    //var x=document.getElementById("twa")
+                    //x.innerHTML = msg.twa[0]
+                    var x = document.getElementById("twa0")
+                    var y = document.getElementById("title0")
+                    x.innerHTML = msg.twa[0]
+                    y.innerHTML = msg.title[0]
+                    y.href = "http://ptt.cc"+msg.url[0]
+
+                    x = document.getElementById("twa1")
+                    y=document.getElementById("title1")
+                    x.innerHTML = msg.twa[1]
+                    y.innerHTML = msg.title[1]
+                    y.href = "http://ptt.cc"+msg.url[1]
+
+                    x = document.getElementById("twa2")
+                    y=document.getElementById("title2")
+                    x.innerHTML = msg.twa[2]
+                    y.innerHTML = msg.title[2]
+                    y.href = "http://ptt.cc"+msg.url[2]
+
+                    /*var str = '';
+                    var el = document.querySelector('.list');
+                    
+                    for(var i=0; i<5; i++){
+                        var content = '<li>'+'<a href ='+msg.url[i]+'>'+msg.title[i]+'</a>'+'</li>';
+                        //content.a.href = msg.url[i]
+                        str += content;
+                        console.log(str);
+                    }
+                    el.innerHTML = str;*/
+                },
+                error: function(){
+                    alert("error")
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <h3>搜尋 ptt 八掛板大於某推文數的最新3篇文章(含置底)</h3>
+    <a>推文數:</a>
+    <div id="aas">
+        <form id="form1" onsubmit="return false" action="##" method="post"> <!--method="post"-->
+            <input type="text" name="twa" id="txttwa" />
+            <input type="button" value="送出" onclick="func()">
+
+        </form>
+    </div>
+    <div>
+        <a id = "twa0"></a>&nbsp<a id = "title0"></a><br>
+        <a id = "twa1"></a>&nbsp<a id = "title1"></a><br>
+        <a id = "twa2"></a>&nbsp<a id = "title2"></a><br>
+            
+    </div>
+
+</body>
+</html>
+
+
+
+<!--
+{% if name == "" %}
+<form method="post">
+    <input type="text" name="user">
+    <input type="submit" name="send" value="送出">
+</form>
+{% else %}
+<form method="post">
+    <input type="text" name="user">
+    <input type="submit" name="send" value="送出">
+</form>
+<p>Hello,{{name}}</p>
+{% endif %}
+-->
